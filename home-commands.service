@@ -1,0 +1,7 @@
+[Unit]
+Description=Service for executing commands from Google Home
+[Service]
+ExecStart=/opt/scripts/home_commands.py
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
