@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import platform
 import toml
 from urllib.parse import urlparse, parse_qs
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -13,8 +14,11 @@ SLEEP_COMMAND = "SUSPEND"
 
 
 def sleep():
-    os.system("wall System is going to sleep.")
-    os.system("systemctl suspend")
+    if platform.system() == "Windows":
+        os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
+    else:
+        os.system("wall System is going to sleep.")
+        os.system("systemctl suspend")
 
 
 class RequestHandler(BaseHTTPRequestHandler):
