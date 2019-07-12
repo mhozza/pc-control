@@ -16,8 +16,6 @@ logging.basicConfig(
     level=logging.DEBUG if DEBUG else logging.INFO,
 )
 
-logging.info("Start logging.")
-
 
 class LogWriter:
     def __init__(self, level=logging.INFO):
@@ -28,10 +26,6 @@ class LogWriter:
 
     def flush(self):
         pass
-
-
-sys.stdout = LogWriter()
-sys.stderr = LogWriter(level=logging.WARNING)
 
 
 def run_as_admin(argv=None, debug=False):
@@ -102,3 +96,6 @@ if __name__ == "__main__":
         finally:
             if DEBUG:
                 input("Press ENTER to exit.")
+else:
+    sys.stdout = LogWriter()
+    sys.stderr = LogWriter(level=logging.WARNING)
